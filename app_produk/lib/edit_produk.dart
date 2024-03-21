@@ -2,26 +2,30 @@ import 'package:app_produk/halaman_produk.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class TambahProduk extends StatefulWidget {
-  const TambahProduk({super.key});
+class UbahProduk extends StatefulWidget {
+  final Map ListData;
+  const UbahProduk({super.key, required this.ListData});
+  
 
   @override
-  State<TambahProduk> createState() => _TambahProdukState();
+  State<UbahProduk> createState() => _UbahProdukState();
 }
 
-class _TambahProdukState extends State<TambahProduk> {
+class _UbahProdukState extends State<UbahProduk> {
   final formKey = GlobalKey<FormState>();
+  TextEditingController id_produk = TextEditingController();
   TextEditingController nama_produk = TextEditingController();
   TextEditingController harga_produk = TextEditingController();
 
-  Future _simpan ()async{
+  Future _ubah ()async{
     final respon = 
-        await http.post(Uri.parse('http://192.168.137.20/api_produk/create.php'),
+        await http.post(Uri.parse('http://192.168.137.20/api_produk/edit.php'),
         body : {
+          'id_produk' : id_produk.text,
           'nama_produk' : nama_produk.text,
           'harga_produk' : harga_produk.text,
         });
-        if(respon.statusCode == 200){
+        if(respon.statusCode==200){
           return true;
         }
         return false;
@@ -29,10 +33,12 @@ class _TambahProdukState extends State<TambahProduk> {
 
   @override
   Widget build(BuildContext context) {
+    id_produk.text = widget.ListData['id_produk'];
+    nama_produk.text = widget.ListData['nama_produk'];
+    harga_produk.text = widget.ListData['harga_produk'];
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tambah Produk'),
-        backgroundColor: Colors.green,
+        title: Text('Ubah Produk'),
       ),
       body: Form(
         key: formKey,
@@ -53,8 +59,7 @@ class _TambahProdukState extends State<TambahProduk> {
                     return "Nama Produk tidak boleh kosong !";
                   }
                   return null;
-                },
-              ), 
+                }), 
                 SizedBox(height: 10),
 
                 TextFormField(
@@ -70,11 +75,11 @@ class _TambahProdukState extends State<TambahProduk> {
                     return "Harga Produk tidak boleh kosong !";
                   }
                   return null;
-                },), 
+                }), 
                 const SizedBox(height: 10),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                    backgroundColor:Colors.green,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     )
@@ -82,27 +87,23 @@ class _TambahProdukState extends State<TambahProduk> {
                   
                   onPressed: (){
                   if(formKey.currentState!.validate()){
-                    _simpan().then((value) {
+                    _ubah().then((value) {
                         if(value){
-                          final snackBar = SnackBar(
-                            content: const Text('Data Berhasil disimpan'),
-                          );
-                          ScaffoldMessenger.of(context)
-                          .showSnackBar(snackBar);
+                          final snackBar = SnackBar(content: const Text('Data Berhasil diubah'),);
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }else{
                           final snackBar = SnackBar(
-                            content: const Text('Data gagal disimpan'),
+                            content: const Text('Data gagal diubah'),
                           );
                           ScaffoldMessenger.of(context)
                             .showSnackBar(snackBar);
                         }
                     });
                     Navigator.pushAndRemoveUntil(context, 
-                      MaterialPageRoute(
-                        builder: ((context)=>HalamanProduk())), 
+                      MaterialPageRoute(builder: ((context)=>HalamanProduk())), 
                       (route) => false);
                   }
-                }, child: Text('Simpan')) 
+                }, child: Text('Update')) 
             ],),
       ),),
     );
