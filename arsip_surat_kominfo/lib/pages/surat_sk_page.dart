@@ -6,12 +6,24 @@ class SuratSkPage extends StatefulWidget {
 }
 
 class _SuratSkPageState extends State<SuratSkPage> {
-  final TextEditingController _tanggalController = TextEditingController();
+  DateTime _selectedDate = DateTime.now(); // Variabel untuk menyimpan tanggal yang dipilih
   final TextEditingController _alamatController = TextEditingController();
   final TextEditingController _keteranganController = TextEditingController();
   final TextEditingController _namaPenerimaController = TextEditingController();
-
   String _ttdSk = ''; // Variabel untuk menyimpan tanda tangan
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+    if (pickedDate != null && pickedDate != _selectedDate)
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +35,25 @@ class _SuratSkPageState extends State<SuratSkPage> {
         padding: EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            TextFormField(
-              controller: _tanggalController,
-              decoration: InputDecoration(labelText: 'Tanggal'),
+            InkWell(
+              onTap: () {
+                _selectDate(context);
+              },
+              child: InputDecorator(
+                decoration: InputDecoration(
+                  labelText: 'Tanggal',
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      "${_selectedDate.toLocal()}".split(' ')[0],
+                    ),
+                    Icon(Icons.calendar_today),
+                  ],
+                ),
+              ),
             ),
             TextFormField(
               controller: _alamatController,
@@ -46,7 +74,7 @@ class _SuratSkPageState extends State<SuratSkPage> {
               onPressed: () {
                 // Menyimpan data surat SK ke dalam variabel atau mengirim ke server
                 final suratSK = {
-                  'tanggal': _tanggalController.text,
+                  'tanggal': _selectedDate,
                   'alamat': _alamatController.text,
                   'keterangan': _keteranganController.text,
                   'namaPenerima': _namaPenerimaController.text,
@@ -56,7 +84,6 @@ class _SuratSkPageState extends State<SuratSkPage> {
                 // Lakukan sesuatu dengan data surat SK, misalnya simpan ke server
 
                 // Kosongkan nilai pada TextFormField setelah tombol "Simpan" ditekan
-                _tanggalController.clear();
                 _alamatController.clear();
                 _keteranganController.clear();
                 _namaPenerimaController.clear();
