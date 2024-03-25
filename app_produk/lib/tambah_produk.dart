@@ -16,7 +16,7 @@ class _TambahProdukState extends State<TambahProduk> {
 
   Future _simpan ()async{
     final respon = 
-        await http.post(Uri.parse('http://192.168.137.20/api_produk/create.php'),
+        await http.post(Uri.parse('http://192.168.136.167/api_produk/create.php'),
         body : {
           'nama_produk' : nama_produk.text,
           'harga_produk' : harga_produk.text,
@@ -25,19 +25,19 @@ class _TambahProdukState extends State<TambahProduk> {
           return true;
         }
         return false;
-  }
+      }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tambah Produk'),
+        title: const Text('Tambah Produk'),
         backgroundColor: Colors.green,
       ),
       body: Form(
         key: formKey,
         child: Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             children: [
               TextFormField(
@@ -55,8 +55,7 @@ class _TambahProdukState extends State<TambahProduk> {
                   return null;
                 },
               ), 
-                SizedBox(height: 10),
-
+                const SizedBox(height: 10),
                 TextFormField(
                 controller: harga_produk,
                 decoration: InputDecoration(
@@ -99,10 +98,10 @@ class _TambahProdukState extends State<TambahProduk> {
                     });
                     Navigator.pushAndRemoveUntil(context, 
                       MaterialPageRoute(
-                        builder: ((context)=>HalamanProduk())), 
+                        builder: ((context)=>const HalamanProduk())), 
                       (route) => false);
                   }
-                }, child: Text('Simpan')) 
+                }, child: const Text('Simpan')) 
             ],),
       ),),
     );

@@ -20,7 +20,7 @@ class _HalamanProdukState extends State<HalamanProduk> {
   Future _getdata() async {
     try {
       final respon = 
-        await http.get(Uri.parse('http://192.168.137.20/api_produk/read.php'));
+        await http.get(Uri.parse('http://192.168.136.167/api_produk/read.php'));
       if (respon.statusCode == 200){
         final data = jsonDecode(respon.body);
         setState(() {
@@ -36,7 +36,7 @@ class _HalamanProdukState extends State<HalamanProduk> {
   Future _hapus(String id) async {
     try {
       final respon = 
-        await http.post(Uri.parse('http://192.168.137.20/api_produk/delete.php'),body: {
+        await http.post(Uri.parse('http://192.168.136.167/api_produk/delete.php'),body: {
           "id_produk":id,
         });
       if (respon.statusCode == 200){
@@ -63,7 +63,8 @@ class _HalamanProdukState extends State<HalamanProduk> {
         title: Text('Halaman Produk'),
         backgroundColor: Colors.green,
       ),
-      body: _loading ? Center(
+      body: _loading 
+      ? Center(
         child: CircularProgressIndicator(),
       )
       :ListView.builder(

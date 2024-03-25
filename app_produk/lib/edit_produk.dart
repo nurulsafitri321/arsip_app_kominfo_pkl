@@ -19,7 +19,7 @@ class _UbahProdukState extends State<UbahProduk> {
 
   Future _ubah ()async{
     final respon = 
-        await http.post(Uri.parse('http://192.168.137.20/api_produk/edit.php'),
+        await http.post(Uri.parse('http://192.168.136.167/api_produk/edit.php'),
         body : {
           'id_produk' : id_produk.text,
           'nama_produk' : nama_produk.text,
