@@ -12,8 +12,8 @@ class SignUp extends StatelessWidget {
           try {
             UserCredential userCredential =
                 await FirebaseAuth.instance.createUserWithEmailAndPassword(
-              email: 'nrlsftr161@gmail.com',
-              password: '123456',
+              email: 'rahmat@gmail.com',
+              password: '654321',
             );
             // Jika berhasil mendaftar, tampilkan pesan sukses
             showDialog(
