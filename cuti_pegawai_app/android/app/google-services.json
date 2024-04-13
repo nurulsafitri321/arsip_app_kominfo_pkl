@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "203355584591",
+    "project_id": "db-arsip",
+    "storage_bucket": "db-arsip.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203355584591:android:c1cde6b253fa2a3bd2123a",
+        "android_client_info": {
+          "package_name": "com.example.arsip_surat_kominfo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoRbJkjw5_GAqXEpYq4Nk63VLePJr_xwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203355584591:android:01a60f97b1f1dec3d2123a",
+        "android_client_info": {
+          "package_name": "com.example.cuti_pegawai_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoRbJkjw5_GAqXEpYq4Nk63VLePJr_xwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

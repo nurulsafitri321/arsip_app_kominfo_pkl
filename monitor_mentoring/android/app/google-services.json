@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "493303279887",
+    "project_id": "db-monitormentoring",
+    "storage_bucket": "db-monitormentoring.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:493303279887:android:07c9cf28555d52c808ce7a",
+        "android_client_info": {
+          "package_name": "com.example.monitor_mentoring"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGxhkRL72tyEfMNCC-sJFiASGDY_d3tQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
