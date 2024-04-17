@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "94969296402",
+    "project_id": "datafirebase-965fe",
+    "storage_bucket": "datafirebase-965fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94969296402:android:85a4256e196f443d218acb",
+        "android_client_info": {
+          "package_name": "com.example.cuti_pegawai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ-ufUNnkF_9r9_CW3TBxKzP6CZOlBkg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
