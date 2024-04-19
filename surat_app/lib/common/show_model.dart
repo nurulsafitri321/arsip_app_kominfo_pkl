@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:surat_app/constants/app_style.dart';
+import 'package:surat_app/widget/date_time_widget.dart';
 import 'package:surat_app/widget/radio_widget.dart';
 import 'package:surat_app/widget/textField_widget.dart';
 
@@ -15,7 +16,7 @@ class AddNewModel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(30),
-      height: MediaQuery.of(context).size.height * 0.70,
+      height: MediaQuery.of(context).size.height * 0.80,
       decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(16),
@@ -64,12 +65,57 @@ class AddNewModel extends StatelessWidget {
                 child: RadioWidget(categoryColor: Colors.green, titleRadio: 's.tugas'),
               ),
             ],
+          ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [    
+              DateTimeWidget(
+                titleText: 'Date', 
+                valueText: 'dd/mm/yy', 
+                iconSec: CupertinoIcons.calendar),
+              Gap(22),
+              DateTimeWidget(
+                titleText: 'Time', 
+                valueText: 'hh : mm', 
+                iconSec: CupertinoIcons.clock),
+            ],
+          ),
+          Gap(12),
+
+          //ButtonSectin
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey.shade100,
+                    foregroundColor: Colors.blue.shade800,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  ),
+                  onPressed: () {},
+                  child: const Text('Cancel'),
+                  ),
+                ),
+                const Gap(20),
+                Expanded(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue.shade800,
+                    foregroundColor: Colors.white,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  ),
+                  onPressed: () {},
+                  child: const Text('Create'),
+                  ),
+                ),
+            ],
           )
         ],
       ), 
     );
   }
 }
-
-
 
