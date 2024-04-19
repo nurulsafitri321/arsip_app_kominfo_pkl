@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RadioWidget extends StatelessWidget {
@@ -25,9 +24,7 @@ class RadioWidget extends StatelessWidget {
               TextStyle(color: categoryColor, fontWeight: FontWeight.w700),)),
           value: 1, 
           groupValue: 0, 
-          onChanged: (value){
-          
-          },
+          onChanged: (value) {},
         ),
       ),
     );

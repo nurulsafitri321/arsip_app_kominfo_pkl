@@ -54,12 +54,12 @@ class AddNewModel extends StatelessWidget {
           const Gap(12),
           const Text('Category', style: AppStyle.headingOne),
           Row(
-            children: const [
-              Expanded(
+            children: [
+              const Expanded(
                 child: RadioWidget(categoryColor: Colors.red, titleRadio: 's.mask'),
               ),
               Expanded(
-                child: RadioWidget(categoryColor: Colors.blue, titleRadio: 's.kluar'),
+                child: RadioWidget(categoryColor: Colors.amber, titleRadio: 's.kluar'),
               ),
               Expanded(
                 child: RadioWidget(categoryColor: Colors.green, titleRadio: 's.tugas'),
@@ -89,10 +89,14 @@ class AddNewModel extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey.shade100,
+                    backgroundColor: Colors.white,
                     foregroundColor: Colors.blue.shade800,
                     elevation: 0,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    side: BorderSide(
+                      color: Colors.blue.shade800,
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                   onPressed: () {},
                   child: const Text('Cancel'),
@@ -106,6 +110,7 @@ class AddNewModel extends StatelessWidget {
                     foregroundColor: Colors.white,
                     elevation: 0,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                   onPressed: () {},
                   child: const Text('Create'),
