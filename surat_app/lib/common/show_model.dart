@@ -1,19 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:surat_app/constants/app_style.dart';
+import 'package:surat_app/provider/radio_provider.dart';
 import 'package:surat_app/widget/date_time_widget.dart';
 import 'package:surat_app/widget/radio_widget.dart';
 import 'package:surat_app/widget/textField_widget.dart';
 
-class AddNewModel extends StatelessWidget {
+class AddNewModel extends ConsumerWidget {
   const AddNewModel({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    //final radioCategory = ref.watch(radioProvider);
     return Container(
       padding: const EdgeInsets.all(30),
       height: MediaQuery.of(context).size.height * 0.80,
@@ -55,30 +58,57 @@ class AddNewModel extends StatelessWidget {
           const Text('Category', style: AppStyle.headingOne),
           Row(
             children: [
-              const Expanded(
-                child: RadioWidget(categoryColor: Colors.red, titleRadio: 's.mask'),
+              Expanded(
+                child: RadioWidget(
+                  categoryColor: Colors.red, 
+                  titleRadio: 's.mask', 
+                  valueInput: 1,
+                  onChangedValue: () => ref.read(radioProvider.notifier).update
+                  ((state) => 1)),
               ),
               Expanded(
-                child: RadioWidget(categoryColor: Colors.amber, titleRadio: 's.kluar'),
+                child: RadioWidget(
+                  categoryColor: Colors.amber, 
+                  titleRadio: 's.kluar', 
+                  valueInput: 2,
+                  onChangedValue: () => ref.read(radioProvider.notifier).update
+                  ((state) => 2),
+                  ),
               ),
               Expanded(
-                child: RadioWidget(categoryColor: Colors.green, titleRadio: 's.tugas'),
+                child: RadioWidget(
+                  categoryColor: Colors.green, 
+                  titleRadio: 's.tugas', 
+                  valueInput: 3,
+                  onChangedValue: () => ref.read(radioProvider.notifier).update
+                  ((state) => 3),
+                  ),
               ),
             ],
           ),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [    
+            children: [    
               DateTimeWidget(
                 titleText: 'Date', 
                 valueText: 'dd/mm/yy', 
-                iconSec: CupertinoIcons.calendar),
+                iconSec: CupertinoIcons.calendar,
+                onTap: () => showDatePicker(
+                  context: context, initialDate: 
+                  DateTime.now(), 
+                  firstDate: DateTime(2023), 
+                  lastDate: DateTime(2027)),
+                ),
               Gap(22),
               DateTimeWidget(
                 titleText: 'Time', 
                 valueText: 'hh : mm', 
-                iconSec: CupertinoIcons.clock),
+                iconSec: CupertinoIcons.clock,
+                onTap: () => showTimePicker(
+                  context: context, 
+                  initialTime: TimeOfDay.now()),
+                ),
             ],
           ),
           Gap(12),
