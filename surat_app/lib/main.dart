@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:surat_app/widget/card_todo_widget.dart';
 import 'common/show_model.dart';
 
 void main() {
@@ -94,12 +96,18 @@ class HomePage extends StatelessWidget {
             child: const Text('+ New'),
           ),
         ],
-      )
+      ),
+      
+      const Gap(20),   //card list task
+      ListView.builder(
+      itemCount: 1,
+      shrinkWrap: true,
+      itemBuilder:(context, index) => CardTodoListWidget(),
+      ),
+
     ],),
     )),
     );
   }
 }
-
-
 

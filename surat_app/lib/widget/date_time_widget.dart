@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
 import '../constants/app_style.dart';
 
-class DateTimeWidget extends StatelessWidget {
+class DateTimeWidget extends ConsumerWidget {
   const DateTimeWidget({
     super.key,
     required this.titleText,
@@ -20,7 +21,7 @@ class DateTimeWidget extends StatelessWidget {
   final VoidCallback onTap;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

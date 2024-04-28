@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:surat_app/constants/app_style.dart';
+import 'package:surat_app/provider/datetime_provider.dart';
 import 'package:surat_app/provider/radio_provider.dart';
 import 'package:surat_app/widget/date_time_widget.dart';
 import 'package:surat_app/widget/radio_widget.dart';
@@ -16,6 +18,7 @@ class AddNewModel extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final dateProv = ref.watch(dateProvider);
     //final radioCategory = ref.watch(radioProvider);
     return Container(
       padding: const EdgeInsets.all(30),
@@ -92,22 +95,40 @@ class AddNewModel extends ConsumerWidget {
             children: [    
               DateTimeWidget(
                 titleText: 'Date', 
-                valueText: 'dd/mm/yy', 
+                valueText: dateProv, 
                 iconSec: CupertinoIcons.calendar,
-                onTap: () => showDatePicker(
-                  context: context, initialDate: 
-                  DateTime.now(), 
+                onTap: () async {
+                  final getValue = await showDatePicker(
+                  context: context, 
+                  initialDate: DateTime.now(), 
                   firstDate: DateTime(2023), 
-                  lastDate: DateTime(2027)),
+                  lastDate: DateTime(2027));
+
+                  if (getValue != null) {
+                    final format = DateFormat.yMd();
+                    ref 
+                    .read(dateProvider.notifier)
+                    .update((state) => format.format(getValue));             
+                      }
+                  },  
                 ),
-              Gap(22),
+              const Gap(22),
               DateTimeWidget(
                 titleText: 'Time', 
-                valueText: 'hh : mm', 
+                valueText: ref.watch(timeProvider), 
                 iconSec: CupertinoIcons.clock,
-                onTap: () => showTimePicker(
+                onTap: () async{
+                  final getTime = await showTimePicker(
                   context: context, 
-                  initialTime: TimeOfDay.now()),
+                  initialTime: TimeOfDay.now(),
+                  );
+                  if (getTime != null){
+                    ref
+                        .read(timeProvider.notifier)
+                        .update((state) => getTime.format(context));
+                  }
+                  
+                },
                 ),
             ],
           ),
@@ -128,7 +149,7 @@ class AddNewModel extends ConsumerWidget {
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
-                  onPressed: () {},
+                  onPressed: () => Navigator.pop(context),
                   child: const Text('Cancel'),
                   ),
                 ),
