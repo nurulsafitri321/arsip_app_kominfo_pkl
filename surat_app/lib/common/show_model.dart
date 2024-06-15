@@ -5,16 +5,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:surat_app/constants/app_style.dart';
+import 'package:surat_app/model/surat_model.dart';
 import 'package:surat_app/provider/datetime_provider.dart';
 import 'package:surat_app/provider/radio_provider.dart';
+import 'package:surat_app/provider/service_provider.dart';
 import 'package:surat_app/widget/date_time_widget.dart';
 import 'package:surat_app/widget/radio_widget.dart';
 import 'package:surat_app/widget/textField_widget.dart';
 
 class AddNewModel extends ConsumerWidget {
-  const AddNewModel({
+  AddNewModel({
     super.key,
   });
+
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,7 +27,7 @@ class AddNewModel extends ConsumerWidget {
     //final radioCategory = ref.watch(radioProvider);
     return Container(
       padding: const EdgeInsets.all(30),
-      height: MediaQuery.of(context).size.height * 0.80,
+      height: MediaQuery.of(context).size.height * 0.98,
       decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(16),
@@ -48,15 +53,15 @@ class AddNewModel extends ConsumerWidget {
           ),
           const Gap(12),
           const Text(
-            'Title Arsip',
+            'Isi Ringkasan',
             style: AppStyle.headingOne
           ),
           const Gap(6),
-          TextFieldWidget(maxLine: 1, hintText: 'Add Arsip Name'),
+          TextFieldWidget(maxLine: 1, hintText: 'Add Arsip Name', txtController: titleController,),
           const Gap(12),
-          const Text('Description', style: AppStyle.headingOne),
+          const Text('No Surat', style: AppStyle.headingOne),
           const Gap(6),
-          const TextFieldWidget(maxLine: 5, hintText: 'Add Description'),
+          TextFieldWidget(maxLine: 5, hintText: 'Add Description', txtController: descriptionController),
           const Gap(12),
           const Text('Category', style: AppStyle.headingOne),
           Row(
@@ -163,7 +168,35 @@ class AddNewModel extends ConsumerWidget {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    final getRadioValue = ref.read(radioProvider);
+                    String category = '';
+
+                    switch (getRadioValue) {
+                      case 1: category = 'surat masuk';
+                      break;
+                      case 2: category = 'surat keluar';
+                      break;
+                      case 3: category = 'surat tugas';
+                      break;
+                    }
+
+                    ref.read(serviceProvider).addNewSurat(SuratModel(
+                      titleSurat: titleController.text, 
+                      description: descriptionController.text, 
+                      category: category, 
+                      dateSurat: ref.read(dateProvider), 
+                      timeSurat: ref.read(timeProvider),
+                      // isSelesai: false,
+                      )
+                    );
+                    print('data tersimpan');
+
+                    titleController.clear();
+                    descriptionController.clear();
+                    ref.read(radioProvider.notifier).update((state) => 0);
+                    Navigator.pop(context);
+                  },
                   child: const Text('Create'),
                   ),
                 ),

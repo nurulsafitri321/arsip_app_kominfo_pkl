@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "953417020541",
+    "project_id": "fir-task-21e74",
+    "storage_bucket": "fir-task-21e74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953417020541:android:c1d88b11453bdebd096d14",
+        "android_client_info": {
+          "package_name": "com.example.surat_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxUIKQSM2ZLci95DNRXsayZPTSspgjucM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
